@@ -1,6 +1,6 @@
 outs:
-- md5: 48857b3185c7996fabac51826f1a58a4.dir
-  size: 46968486
-  nfiles: 8
+- md5: 912f39f77d25c350152d75f4310084d5.dir
+  size: 46997060
+  nfiles: 6
   hash: md5
   path: models
