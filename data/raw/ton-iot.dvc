@@ -1,0 +1,6 @@
+outs:
+- md5: 1f1874807b9c900ede4bc6ebb49f1e90.dir
+  size: 1694191
+  nfiles: 1
+  hash: md5
+  path: ton-iot

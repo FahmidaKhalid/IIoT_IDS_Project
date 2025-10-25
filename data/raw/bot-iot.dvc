@@ -1,0 +1,6 @@
+outs:
+- md5: 64a879d7662c94adad53dfa63ecb2367.dir
+  size: 282131555
+  nfiles: 1
+  hash: md5
+  path: bot-iot
