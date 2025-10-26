@@ -1,0 +1,5 @@
+outs:
+- md5: f342779b956c9dc13c369bedd6926331
+  size: 37561040
+  hash: md5
+  path: y_train_bot_iot.npy
