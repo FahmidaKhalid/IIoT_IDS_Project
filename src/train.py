@@ -5,12 +5,19 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import joblib
+import random
+
 from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 from lightgbm import LGBMClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report, confusion_matrix
-from src.config import DATASETS, MODELS_DIR, RESULTS_DIR
+from src.config import DATASETS, MODELS_DIR, RESULTS_DIR  # <- corrected
 
+warnings.filterwarnings("ignore")
+
+SEED = 42
+random.seed(SEED)
+np.random.seed(SEED)
 warnings.filterwarnings("ignore")
 
 def train_all():
