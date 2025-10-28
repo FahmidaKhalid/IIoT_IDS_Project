@@ -1,0 +1,9 @@
+stages:
+  full_pipeline:
+    cmd: python run_all.py
+    deps:
+    - run_all.py
+    outs:
+    - data/processed
+    - models
+    - results
