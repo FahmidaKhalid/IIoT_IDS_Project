@@ -11,7 +11,7 @@ from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 from lightgbm import LGBMClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report, confusion_matrix
-from src.config import DATASETS, MODELS_DIR, RESULTS_DIR  # <- corrected
+from src.config import DATASETS, MODELS_DIR, RESULTS_DIR  
 
 warnings.filterwarnings("ignore")
 
