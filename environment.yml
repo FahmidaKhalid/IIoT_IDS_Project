@@ -1,0 +1,40 @@
+stages:
+  explore:
+    cmd: python src/run_exploration.py
+    deps:
+      - src/run_exploration.py
+      - src/exploration.py
+      - data/raw/
+    outs:
+      - results/exploration_summary.csv
+
+  preprocess:
+    cmd: python src/run_preprocessing.py
+    deps:
+      - src/run_preprocessing.py
+      - src/preprocess.py
+      - data/raw/
+    outs:
+      - data/processed/
+
+  train:
+    cmd: python src/run_training.py
+    deps:
+      - src/run_training.py
+      - src/train.py
+      - data/processed/
+    outs:
+      - models/
+      - results/training_summary.csv
+
+  evaluate:
+    cmd: python src/run_evaluation.py
+    deps:
+      - src/run_evaluation.py
+      - src/evaluate.py
+      - models/
+      - data/processed/
+    outs:
+      - results/evaluation_summary.csv
+      - results/confusion_matrix_bot_iot.png
+      - results/confusion_matrix_ton_iot.png
