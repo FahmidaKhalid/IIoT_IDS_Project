@@ -1,4 +1,5 @@
 [core]
     remote = dione
+    autostage = true
 ['remote "dione"']
     url = ssh://fkhalid@dione.utu.fi:/home/fkhalid/IIoT_IDS_Project/files
