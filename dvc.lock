@@ -1,0 +1,25 @@
+schema: '2.0'
+stages:
+  full_pipeline:
+    cmd: python run_all.py
+    deps:
+    - path: run_all.py
+      hash: md5
+      md5: 36a143140111c3d354bdf22990ed3aff
+      size: 712
+    outs:
+    - path: data/processed
+      hash: md5
+      md5: 18ea1889c7ef537fa368164533f09a61.dir
+      size: 550581376
+      nfiles: 8
+    - path: models
+      hash: md5
+      md5: 912f39f77d25c350152d75f4310084d5.dir
+      size: 46997060
+      nfiles: 6
+    - path: results
+      hash: md5
+      md5: 246bbd49e179028972f327b4ea76f730.dir
+      size: 109563
+      nfiles: 9
