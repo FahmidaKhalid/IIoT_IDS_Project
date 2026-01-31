@@ -92,3 +92,44 @@ def preprocess_ton_iot(file_path, output_dir):
     np.save(os.path.join(output_dir, "y_train_ton_iot.npy"), y_train)
     np.save(os.path.join(output_dir, "y_test_ton_iot.npy"), y_test)
     print("TON-IoT preprocessing complete!")
+def preprocess_unsw_nb15(train_path, test_path, output_dir):
+    """
+    Preprocess the UNSW-NB15 dataset:
+    - Load train & test CSVs
+    - Encode categorical features
+    - Scale numerical features
+    - Save NumPy arrays
+    """
+    print("Processing UNSW-NB15 dataset...")
+
+    train_df = pd.read_csv(train_path)
+    test_df = pd.read_csv(test_path)
+
+    drop_cols = ["id", "attack_cat"]
+    train_df = train_df.drop(columns=drop_cols, errors="ignore")
+    test_df = test_df.drop(columns=drop_cols, errors="ignore")
+
+    y_train = train_df.pop("label").values
+    y_test = test_df.pop("label").values
+
+    categorical_cols = train_df.select_dtypes(include=["object"]).columns
+    encoder = LabelEncoder()
+
+    for col in categorical_cols:
+        combined = pd.concat([train_df[col], test_df[col]])
+        encoder.fit(combined)
+        train_df[col] = encoder.transform(train_df[col])
+        test_df[col] = encoder.transform(test_df[col])
+
+    scaler = StandardScaler()
+    X_train = scaler.fit_transform(train_df)
+    X_test = scaler.transform(test_df)
+
+    os.makedirs(output_dir, exist_ok=True)
+
+    np.save(os.path.join(output_dir, "X_train_unsw.npy"), X_train)
+    np.save(os.path.join(output_dir, "X_test_unsw.npy"), X_test)
+    np.save(os.path.join(output_dir, "y_train_unsw.npy"), y_train)
+    np.save(os.path.join(output_dir, "y_test_unsw.npy"), y_test)
+
+    print("UNSW-NB15 preprocessing complete!")
