@@ -13,20 +13,22 @@ SEED = 42
 DATA_VERSION = "v1"
 MODEL_VERSION = "v1"
 
-DATASETS = {
-    "bot-iot": {
-        "raw": os.path.join(RAW_DIR, "bot-iot", "UNSW_2018_IoT_Botnet_Final_10_best_Training.csv"),
-        "X_train": os.path.join(PROCESSED_DIR, f"X_train_bot_iot.npy"),
-        "X_test": os.path.join(PROCESSED_DIR, f"X_test_bot_iot.npy"),
-        "y_train": os.path.join(PROCESSED_DIR, f"y_train_bot_iot.npy"),
-        "y_test": os.path.join(PROCESSED_DIR, f"y_test_bot_iot.npy"),
-    },
-    "ton-iot-modbus": {
+DATASETS = DATASETS = {
+    "ton-iot": {
         "raw": os.path.join(RAW_DIR, "ton-iot", "Train_Test_IoT_Modbus.csv"),
-        "X_train": os.path.join(PROCESSED_DIR, f"X_train_ton_iot.npy"),
-        "X_test": os.path.join(PROCESSED_DIR, f"X_test_ton_iot.npy"),
-        "y_train": os.path.join(PROCESSED_DIR, f"y_train_ton_iot.npy"),
-        "y_test": os.path.join(PROCESSED_DIR, f"y_test_ton_iot.npy"),
+        "X_train": os.path.join(PROCESSED_DIR, "X_train_ton_iot.npy"),
+        "X_test": os.path.join(PROCESSED_DIR, "X_test_ton_iot.npy"),
+        "y_train": os.path.join(PROCESSED_DIR, "y_train_ton_iot.npy"),
+        "y_test": os.path.join(PROCESSED_DIR, "y_test_ton_iot.npy"),
+    },
+
+    "unsw-nb15": {
+        "train_raw": os.path.join(RAW_DIR, "unsw-nb15", "UNSW_NB15_training-set.csv"),
+        "test_raw": os.path.join(RAW_DIR, "unsw-nb15", "UNSW_NB15_testing-set.csv"),
+        "X_train": os.path.join(PROCESSED_DIR, "X_train_unsw.npy"),
+        "X_test": os.path.join(PROCESSED_DIR, "X_test_unsw.npy"),
+        "y_train": os.path.join(PROCESSED_DIR, "y_train_unsw.npy"),
+        "y_test": os.path.join(PROCESSED_DIR, "y_test_unsw.npy"),
     }
 }
 
