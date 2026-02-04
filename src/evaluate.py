@@ -18,8 +18,17 @@ def evaluate_all():
         X_test = np.load(paths["X_test"])
         y_test = np.load(paths["y_test"], allow_pickle=True)
 
-        for model_name in ["RandomForest", "XGBoost", "LightGBM"]:
-            model_path = os.path.join(MODELS_DIR, f"{dataset_name}_{model_name}.joblib")
+        for model_name in [
+            "NaiveBayes",
+            "LogisticRegression",
+            "KNN",
+            "SVM",
+            "RandomForest",
+            "XGBoost",
+            "MLP"
+        ]:
+
+            model_path = os.path.join(MODELS_DIR, f"{model_name}_{dataset_name}.joblib")
             if not os.path.exists(model_path):
                 print(f"Model {model_name} not found for {dataset_name}, skipping.")
                 continue

@@ -10,11 +10,15 @@ def main():
     print("Starting preprocessing...")
 
     # dataset
-    preprocess_ton_iot(DATASETS["ton-iot"]["raw"], PROCESSED_DIR)
+    preprocess_ton_iot(
+        DATASETS["ton-iot"]["raw"],
+        os.path.join(PROCESSED_DIR, "ton-iot")
+    )
+
     preprocess_unsw_nb15(
         DATASETS["unsw-nb15"]["train_raw"],
         DATASETS["unsw-nb15"]["test_raw"],
-        PROCESSED_DIR
+        os.path.join(PROCESSED_DIR, "unsw-nb15")
     )
 
     print("All preprocessing done!")

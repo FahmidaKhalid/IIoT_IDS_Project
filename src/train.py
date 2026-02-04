@@ -1,67 +1,72 @@
 import os
-import warnings
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 import joblib
-import random
+import warnings
+from sklearn.exceptions import ConvergenceWarning
+warnings.filterwarnings("ignore", category=ConvergenceWarning)
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
-from sklearn.ensemble import RandomForestClassifier
-from xgboost import XGBClassifier
-from lightgbm import LGBMClassifier
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report, confusion_matrix
-from src.config import DATASETS, MODELS_DIR, RESULTS_DIR  
+from src.models import get_models
 
-warnings.filterwarnings("ignore")
+PROCESSED_DIR = "data/processed"
+MODEL_DIR = "models"
+RESULTS_DIR = "results"
 
-SEED = 42
-random.seed(SEED)
-np.random.seed(SEED)
-warnings.filterwarnings("ignore")
+os.makedirs(MODEL_DIR, exist_ok=True)
+os.makedirs(RESULTS_DIR, exist_ok=True)
 
-def train_all():
-    os.makedirs(MODELS_DIR, exist_ok=True)
-    os.makedirs(RESULTS_DIR, exist_ok=True)
+def load_data(dataset):
+    base = os.path.join("data", "processed", dataset)
 
-    models = {
-        "RandomForest": RandomForestClassifier(n_estimators=100, random_state=42),
-        "XGBoost": XGBClassifier(use_label_encoder=False, eval_metric="logloss", random_state=42),
-        "LightGBM": LGBMClassifier(random_state=42)
-    }
+    dataset_file = dataset.replace("-", "_")
 
-    summary_results = []
+    X_train = np.load(os.path.join(base, f"X_train_{dataset_file}.npy"))
+    X_test = np.load(os.path.join(base, f"X_test_{dataset_file}.npy"))
+    y_train = np.load(os.path.join(base, f"y_train_{dataset_file}.npy"))
+    y_test = np.load(os.path.join(base, f"y_test_{dataset_file}.npy"))
 
-    for dataset_name, paths in DATASETS.items():
-        print(f"\n=== Dataset: {dataset_name} ===")
-        X_train = np.load(paths["X_train"])
-        X_test = np.load(paths["X_test"])
-        y_train = np.load(paths["y_train"], allow_pickle=True)
-        y_test = np.load(paths["y_test"], allow_pickle=True)
+    return X_train, X_test, y_train, y_test
 
-        for model_name, model in models.items():
-            print(f"\n--- Model: {model_name} ---")
-            model.fit(X_train, y_train)
-            y_pred = model.predict(X_test)
 
-            acc = accuracy_score(y_test, y_pred)
-            prec = precision_score(y_test, y_pred, average="weighted", zero_division=0)
-            rec = recall_score(y_test, y_pred, average="weighted", zero_division=0)
-            f1 = f1_score(y_test, y_pred, average="weighted", zero_division=0)
+def train_and_evaluate(dataset):
+    print(f"\n Training models for {dataset}")
 
-            print(f"Accuracy: {acc:.4f}, Precision: {prec:.4f}, Recall: {rec:.4f}, F1-score: {f1:.4f}")
-            joblib.dump(model, os.path.join(MODELS_DIR, f"{dataset_name}_{model_name}.joblib"))
+    X_train, X_test, y_train, y_test = load_data(dataset)
+    models = get_models()
 
-            summary_results.append({
-                "Dataset": dataset_name,
-                "Model": model_name,
-                "Accuracy": acc,
-                "Precision": prec,
-                "Recall": rec,
-                "F1-score": f1
-            })
+    results = []
 
-    summary_df = pd.DataFrame(summary_results)
-    summary_csv = os.path.join(RESULTS_DIR, "training_summary.csv")
-    summary_df.to_csv(summary_csv, index=False)
-    print(f"\nTraining summary saved to {summary_csv}")
+    for name, model in models.items():
+        print(f"Training {name}...")
+        model.fit(X_train, y_train)
+
+        y_pred = model.predict(X_test)
+
+        metrics = {
+            "model": name,
+            "accuracy": accuracy_score(y_test, y_pred),
+            "precision": precision_score(y_test, y_pred),
+            "recall": recall_score(y_test, y_pred),
+            "f1": f1_score(y_test, y_pred)
+        }
+
+        results.append(metrics)
+
+        joblib.dump(
+            model,
+            os.path.join(MODEL_DIR, f"{name}_{dataset}.joblib")
+        )
+
+    np.save(
+        os.path.join(RESULTS_DIR, f"metrics_{dataset}.npy"),
+        results
+    )
+
+    print(f" Finished {dataset}")
+
+def main():
+    for dataset in ["ton-iot", "unsw-nb15"]:
+        train_and_evaluate(dataset)
+
+if __name__ == "__main__":
+    main()
