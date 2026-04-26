@@ -6,6 +6,7 @@ This project presents a machine learning-based Intrusion Detection System (IDS) 
 
 The objective is to evaluate and compare multiple machine learning models for detecting malicious network traffic under different dataset conditions. The study focuses on identifying the most effective models for handling complex and non-linear IIoT network patterns.
 This work also emphasizes reproducible experimentation using Git and DVC to ensure transparency and reliability of results.
+
 ---
 
 ## Motivation
@@ -129,10 +130,11 @@ Key findings:
 - Traditional models (Naïve Bayes, Logistic Regression) showed lower performance due to limited capability in capturing non-linear patterns.
 - Ensemble methods consistently outperformed individual models across both datasets.
 
-These results indicate that model performance strongly depends on dataset characteristics.These findings support the hypothesis that ensemble methods are better suited for handling complex and heterogeneous IIoT network data.
+These results indicate that model performance strongly depends on dataset characteristics. These findings further support the hypothesis that ensemble methods are better suited for handling complex and heterogeneous IIoT network data.
 
 ---
-### Model Performance Visualization
+
+## Model Performance Visualization
 
 #### TON-IoT Dataset
 ![TON-IoT Results](reports/ton_iot_results.png)
@@ -150,7 +152,7 @@ Running `dvc pull` may require authentication due to access restrictions.
 
 The dataset is not publicly exposed for security and access control reasons. However, if access is required, it can be shared separately upon request.
 
- Note: Large files such as datasets, trained models, and intermediate results are managed using DVC and are not directly stored in the Git repository.
+**Note:** Large files such as datasets, trained models, and intermediate results are managed using DVC and are not directly stored in the Git repository.
  
 ---
 
@@ -174,11 +176,12 @@ Note: Access to datasets requires university credentials due to server restricti
 
 ## Limitations
 
-- Hyperparameter tuning was kept limited to ensure fair comparison across models.
-- Results are dependent on the selected datasets and may vary with other IIoT environments.
+- Hyperparameter tuning was intentionally limited to ensure fair comparison across models. As a result, some models (especially neural networks) may not have reached their optimal performance.
+- The results are dependent on the selected datasets (TON-IoT and UNSW-NB15) and may vary when applied to other real-world IIoT environments.
+- The experiments were conducted in an offline setting, which does not fully reflect real-time intrusion detection scenarios.
 - Deep learning models were not extensively optimized due to computational constraints.
 
-Future work can explore advanced tuning and additional datasets for further validation.
+Future work can address these limitations by incorporating real-time systems, advanced model tuning, and additional datasets.
 
 ---
 
@@ -188,7 +191,14 @@ This project provides a comparative evaluation of multiple machine learning mode
 
 It demonstrates the effectiveness of ensemble learning methods (Random Forest and XGBoost) and introduces a structured and reproducible experimental pipeline for reliable evaluation.
 
+This project demonstrates not only model performance evaluation but also highlights the importance of reproducibility, making it a reliable and extensible foundation for future IIoT security research.
+
 ---
+
+## Repository Link
+
+GitHub Repository:
+https://github.com/FahmidaKhalid/IIoT_IDS_Project
 
 ## Notes for Evaluator
 
