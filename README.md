@@ -5,7 +5,7 @@
 This project presents a machine learning-based Intrusion Detection System (IDS) for Industrial Internet of Things (IIoT) environments.
 
 The objective is to evaluate and compare multiple machine learning models for detecting malicious network traffic under different dataset conditions. The study focuses on identifying the most effective models for handling complex and non-linear IIoT network patterns.
-
+This work also emphasizes reproducible experimentation using Git and DVC to ensure transparency and reliability of results.
 ---
 
 ## Motivation
@@ -27,6 +27,21 @@ The goal is to understand how different models behave under different dataset ch
 * Random Forest
 * XGBoost
 * Multi-Layer Perceptron (MLP)
+
+---
+
+### Why These Models?
+
+The selected models represent a diverse range of machine learning approaches:
+
+- Probabilistic (Naïve Bayes)
+- Linear (Logistic Regression)
+- Distance-based (KNN)
+- Margin-based (SVM)
+- Ensemble learning (Random Forest, XGBoost)
+- Neural networks (MLP)
+
+This diversity allows comprehensive evaluation of how different learning paradigms perform under varying IIoT data conditions.
 
 ---
 
@@ -114,7 +129,7 @@ Key findings:
 - Traditional models (Naïve Bayes, Logistic Regression) showed lower performance due to limited capability in capturing non-linear patterns.
 - Ensemble methods consistently outperformed individual models across both datasets.
 
-These results indicate that model performance strongly depends on dataset characteristics.
+These results indicate that model performance strongly depends on dataset characteristics.These findings support the hypothesis that ensemble methods are better suited for handling complex and heterogeneous IIoT network data.
 
 ---
 ### Model Performance Visualization
@@ -136,6 +151,7 @@ Running `dvc pull` may require authentication due to access restrictions.
 The dataset is not publicly exposed for security and access control reasons. However, if access is required, it can be shared separately upon request.
 
  Note: Large files such as datasets, trained models, and intermediate results are managed using DVC and are not directly stored in the Git repository.
+ 
 ---
 
 ## Reproducibility
@@ -153,6 +169,17 @@ To reproduce results:
 3. Execute `python run_all.py`
 
 Note: Access to datasets requires university credentials due to server restrictions.
+
+---
+
+## Limitations
+
+- Hyperparameter tuning was kept limited to ensure fair comparison across models.
+- Results are dependent on the selected datasets and may vary with other IIoT environments.
+- Deep learning models were not extensively optimized due to computational constraints.
+
+Future work can explore advanced tuning and additional datasets for further validation.
+
 ---
 
 ## Contribution
