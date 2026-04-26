@@ -8,6 +8,16 @@ The objective is to evaluate and compare multiple machine learning models for de
 
 ---
 
+## Motivation
+
+Industrial IoT (IIoT) systems are increasingly used in critical infrastructures such as manufacturing and energy systems. These environments are vulnerable to cyberattacks that can disrupt operations and cause significant damage.
+
+Traditional intrusion detection systems struggle to detect modern and unknown attacks. Therefore, this project investigates whether machine learning models—especially ensemble methods—can improve detection performance in complex IIoT environments.
+
+The goal is to understand how different models behave under different dataset characteristics (balanced vs imbalanced, simple vs complex traffic).
+
+--- 
+
 ## Models Implemented
 
 * Naïve Bayes
@@ -22,8 +32,19 @@ The objective is to evaluate and compare multiple machine learning models for de
 
 ## Datasets Used
 
-* TON-IoT Dataset
-* UNSW-NB15 Dataset
+### TON-IoT Dataset
+The TON-IoT dataset contains telemetry data from realistic IoT/IIoT environments, including industrial protocols such as Modbus. It represents relatively structured and balanced data, making it suitable for evaluating model performance under controlled conditions.
+
+### UNSW-NB15 Dataset
+The UNSW-NB15 dataset contains modern network traffic with diverse attack types and complex feature distributions. It includes imbalanced classes and more challenging patterns, making it suitable for testing model robustness.
+
+### Why These Datasets?
+Using both datasets allows comparison across different conditions:
+- Balanced vs imbalanced data
+- Simpler vs complex attack patterns
+- Controlled vs realistic network environments
+
+This helps evaluate how model performance changes depending on dataset characteristics.
 
 ---
 
@@ -70,15 +91,29 @@ python run_all.py
 ```
 
 ---
+## Experimental Pipeline
 
+The project follows a structured machine learning pipeline:
+
+1. Data preprocessing (cleaning, encoding, normalization)
+2. Train-test split
+3. Model training (7 algorithms)
+4. Model evaluation using standard metrics
+5. Result visualization and comparison
+
+All steps are implemented in modular scripts inside the `src/` directory.
+
+---
 ## Results
 
-Key findings of the study include:
+Key findings:
 
-* Random Forest achieved the highest accuracy (98.42%) on the TON-IoT dataset
-* XGBoost achieved the best performance (87.54%) on the UNSW-NB15 dataset
-* Ensemble learning methods outperform traditional machine learning models
-* Model performance varies depending on dataset characteristics
+- Random Forest achieved the highest accuracy (98.42%) on the TON-IoT dataset due to its ability to handle structured and less noisy data effectively.
+- XGBoost performed best (87.54%) on the UNSW-NB15 dataset, likely due to its robustness in handling complex and imbalanced data.
+- Traditional models (Naïve Bayes, Logistic Regression) showed lower performance due to limited capability in capturing non-linear patterns.
+- Ensemble methods consistently outperformed individual models across both datasets.
+
+These results indicate that model performance strongly depends on dataset characteristics.
 
 ---
 ### Model Performance Visualization
@@ -103,10 +138,19 @@ The dataset is not publicly exposed for security and access control reasons. How
 
 ## Reproducibility
 
-This project ensures reproducibility using Git and DVC.
+This project ensures reproducibility through:
 
-The code, workflow, and experimental pipeline are fully available in this repository. All experiments can be reproduced by following the provided steps, given appropriate dataset access.
+- Version-controlled code using Git
+- Data versioning using DVC
+- Modular pipeline structure (`run_all.py`)
+- Fixed preprocessing and evaluation workflow
 
+To reproduce results:
+1. Clone the repository
+2. Run `dvc pull` to retrieve datasets (authentication required)
+3. Execute `python run_all.py`
+
+Note: Access to datasets requires university credentials due to server restrictions.
 ---
 
 ## Contribution
@@ -114,3 +158,11 @@ The code, workflow, and experimental pipeline are fully available in this reposi
 This project provides a comparative evaluation of multiple machine learning models for IIoT intrusion detection.
 
 It demonstrates the effectiveness of ensemble learning methods (Random Forest and XGBoost) and introduces a structured and reproducible experimental pipeline for reliable evaluation.
+
+---
+
+## Notes for Evaluator
+
+- The repository contains all code and pipeline logic.
+- Large datasets are managed via DVC and stored on a secure university server.
+- If access issues occur, datasets can be shared upon request.
