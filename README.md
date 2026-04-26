@@ -119,10 +119,10 @@ These results indicate that model performance strongly depends on dataset charac
 ### Model Performance Visualization
 
 #### TON-IoT Dataset
-![TON-IoT Results](results/ton_iot_results.png)
+![TON-IoT Results](reports/ton_iot_results.png)
 
 #### UNSW-NB15 Dataset
-![UNSW-NB15 Results](results/unsw_nb15_results.png)
+![UNSW-NB15 Results](reports/unsw_nb15_results.png)
 
 ---
 
