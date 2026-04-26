@@ -81,6 +81,15 @@ Key findings of the study include:
 * Model performance varies depending on dataset characteristics
 
 ---
+### Model Performance Visualization
+
+#### TON-IoT Dataset
+![TON-IoT Results](results/ton_iot_results.png)
+
+#### UNSW-NB15 Dataset
+![UNSW-NB15 Results](results/unsw_nb15_results.png)
+
+---
 
 ## Dataset Access Note
 
