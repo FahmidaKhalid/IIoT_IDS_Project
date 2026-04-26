@@ -52,9 +52,10 @@ This helps evaluate how model performance changes depending on dataset character
 
 ```
 IIoT_IDS_Project/
-├── data/
-├── models/
-├── results/
+├── data/        (managed by DVC)
+├── models/      (managed by DVC)
+├── results/     (managed by DVC)
+├── reports/     (final outputs & visualizations)
 ├── src/
 ├── run_all.py
 ├── requirements.txt
@@ -134,6 +135,7 @@ Running `dvc pull` may require authentication due to access restrictions.
 
 The dataset is not publicly exposed for security and access control reasons. However, if access is required, it can be shared separately upon request.
 
+ Note: Large files such as datasets, trained models, and intermediate results are managed using DVC and are not directly stored in the Git repository.
 ---
 
 ## Reproducibility
