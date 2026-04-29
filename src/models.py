@@ -1,7 +1,8 @@
 from sklearn.naive_bayes import GaussianNB
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.svm import SVC
+from sklearn.svm import LinearSVC
+from sklearn.calibration import CalibratedClassifierCV
 from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 from sklearn.neural_network import MLPClassifier
@@ -17,7 +18,10 @@ def get_models():
 
         "KNN": KNeighborsClassifier(n_neighbors=5),
 
-        "SVM": SVC(kernel="rbf", probability=True),
+        # LinearSVC — RBF-এর চেয়ে ১০x দ্রুত, ROC curve ও কাজ করবে
+        "SVM": CalibratedClassifierCV(
+            LinearSVC(max_iter=2000, random_state=42)
+        ),
 
         "RandomForest": RandomForestClassifier(
             n_estimators=200,
@@ -35,7 +39,7 @@ def get_models():
 
         "MLP": MLPClassifier(
             hidden_layer_sizes=(128, 64),
-            max_iter=50,
+            max_iter=500,
             random_state=42
         )
     }
