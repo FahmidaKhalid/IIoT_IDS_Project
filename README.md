@@ -86,13 +86,13 @@ IIoT_IDS_Project/
 │   ├── evaluate.py
 │   └── explore.py
 ├── feature_importance.py
+├── learning_curve_analysis.py
 ├── run_all.py
 ├── requirements.txt
 └── README.md
 ```
 
 ---
-
 ## How to Run
 
 **1. Clone the repository:**
@@ -121,6 +121,11 @@ python run_all.py
 python feature_importance.py
 ```
 
+**6. Generate learning curve plots:**
+```bash
+python learning_curve_analysis.py
+```
+
 ---
 
 ## Experimental Pipeline
@@ -133,7 +138,8 @@ The project follows a structured and reproducible machine learning pipeline:
 4. **Model Evaluation** — accuracy, precision, recall, F1-score, ROC-AUC
 5. **Statistical Testing** — Wilcoxon Signed-Rank Test for significance
 6. **Feature Importance** — Random Forest and XGBoost feature analysis
-7. **Visualization** — confusion matrices, ROC curves, accuracy comparison charts
+7. **Learning Curve Analysis** — generalization and overfitting validation
+8. **Visualization** — confusion matrices, ROC curves, accuracy comparison charts
 
 All steps are implemented in modular scripts inside the `src/` directory.
 
@@ -171,6 +177,7 @@ All steps are implemented in modular scripts inside the `src/` directory.
 - **XGBoost** performed best on UNSW-NB15 (87.54% accuracy, ROC-AUC: 0.9845), demonstrating its effectiveness on complex and imbalanced data.
 - All model performance differences were statistically significant (Wilcoxon Signed-Rank Test, p < 0.05).
 - Ensemble methods consistently outperformed traditional models across both datasets.
+- Learning curve analysis confirmed that both Random Forest and XGBoost generalize effectively without overfitting, with generalization gaps of 0.0376 and 0.0666 respectively.
 
 ---
 
@@ -208,6 +215,14 @@ All steps are implemented in modular scripts inside the `src/` directory.
 #### XGBoost — UNSW-NB15
 ![XGBoost Feature Importance](reports/unsw-nb15_XGBoost_feature_importance.png)
 
+### Learning Curves (Best Models)
+
+#### Random Forest — TON-IoT
+![Random Forest Learning Curve](reports/learning_curve_RandomForest_ton-iot.png)
+
+#### XGBoost — UNSW-NB15
+![XGBoost Learning Curve](reports/learning_curve_XGBoost_unsw-nb15.png)
+
 ---
 
 ## Dataset Access Note
@@ -236,6 +251,7 @@ To reproduce results:
 2. Run `dvc pull` to retrieve datasets (authentication required)
 3. Execute `python run_all.py`
 4. Execute `python feature_importance.py`
+5. Execute `python learning_curve_analysis.py`
 
 ---
 
@@ -257,7 +273,8 @@ This project provides:
 3. 5-fold Stratified Cross-Validation with mean ± std reporting
 4. Statistical significance testing using Wilcoxon Signed-Rank Test
 5. ROC-AUC analysis and feature importance investigation
-6. A structured and reproducible experimental pipeline
+6. Learning curve analysis confirming generalization without overfitting
+7. A structured and reproducible experimental pipeline
 
 ---
 
